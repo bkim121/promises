@@ -18,8 +18,16 @@ var pluckFirstLineFromFile = function (filePath, ...args) {
 };
 
 // This function should retrieve the status code of a GET request to `url`
-var getStatusCode = function (url) {
+var getStatusCode = function (url, ...args) {
   // TODO
+  request(url, (err, res, body) => {
+    if (err) {
+      args[args.length - 1](err);
+    } else {
+      args[args.length - 1](err, res.statusCode);
+    }
+  });
+  
 };
 
 // Export these functions so we can test them and reuse them in later exercises
